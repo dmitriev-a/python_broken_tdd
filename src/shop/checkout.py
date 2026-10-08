@@ -20,8 +20,7 @@ def validate_order(
     promo_code: str = "",
     shipping_city: str = "",
 ) -> str | None:
-    """Return a human readable reason why the order is invalid, or None if it is fine."""
-    ...
+    return None
 
 
 def calculate_order_total(
@@ -29,5 +28,5 @@ def calculate_order_total(
     promo_code: str = "",
     shipping_city: str = "",
 ) -> int | None:
-    """Return the order total in kopecks, or None if the order is invalid."""
-    ...
+    subtotal = sum(int(line["qty"]) * int(line["unit_price_kopecks"]) for line in lines)
+    return subtotal * (100 + VAT_PERCENT) // 100
